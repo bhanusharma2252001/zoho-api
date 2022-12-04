@@ -1,9 +1,9 @@
-
-const TableRow = ()=> {return (
+import React from "react";
+const TableRow = (props)=> {return (
     <tr>
-      <td>Alfreds Futterkiste</td>
-      <td>Maria Anders</td>
-      <td>Germany</td>
+      <td>{props.firstname}</td>
+      <td>{props.lastname}</td>
+      <td>{props.email}</td>
     </tr>
 )}
   

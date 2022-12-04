@@ -1,42 +1,40 @@
-
-import TableRow from "./tableRow"
-const BasicTable = ()=> {return (<table>
+import React, { useState } from "react";
+import { useEffect } from "react";
+import TableRow from "./tableRow";
+import axios from "axios"
+function createTableRow(user) {
+  return <TableRow firstname = {user.First_Name} lastname = {user.Last_Name} email ={user.Email}/>
+}
+const BasicTable = ()=> {
+  const [ data, setData ] = useState([]);
+    
+  useEffect(() => {
+    axios
+      .get('http://localhost:3000/api/users/')
+      .then((res) => {
+        console.log(res);
+         setData(res.data)
+       })
+       .catch((err) => console.log(err));
+      },[]);
+  // const [ data, setData ] = useState([]);
+  // useEffect( ()=>{fetch("http://localhost:3000/api/users/")
+  //     .then((o)=> {
+  //       var myAPIRES = o.json()
+  //       setData([myAPIRES])
+  //       console.log("hello",myAPIRES) 
+  //     })},[]) 
+          
+    
+  return (<table>
   <tr>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Country</th>
+    <th>firstname</th>
+    <th>lastname</th>
+    <th>email</th>
   </tr>
-  <TableRow/>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-  </tr>
-  <tr>
-    <td>Ernst Handel</td>
-    <td>Roland Mendel</td>
-    <td>Austria</td>
-  </tr>
-  <tr>
-    <td>Island Trading</td>
-    <td>Helen Bennett</td>
-    <td>UK</td>
-  </tr>
-  <tr>
-    <td>Laughing Bacchus Winecellars</td>
-    <td>Yoshi Tannamuri</td>
-    <td>Canada</td>
-  </tr>
-  <tr>
-    <td>Magazzini Alimentari Riuniti</td>
-    <td>Giovanni Rovelli</td>
-    <td>Italy</td>
-  </tr>
+{data.map((o)=>{
+  return createTableRow(o)
+})}
 </table>)}
 
 export default BasicTable;

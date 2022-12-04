@@ -8,16 +8,15 @@ const {
 const axios = require('axios')
 const router = require("express").Router();
 
-//GET USER
-router.get("/find/:id", async (req, res) => {
+//INSERT USERS
+router.get("/insert", async (req, res) => {
   try {
     const response =  await axios({
       method: 'get',
       url: 'https://www.zohoapis.in/crm/v3/Leads?fields=Last_Name,Email,First_Name&per_page=10',
-      headers: {'Authorization': 'Zoho-oauthtoken 1000.722bf3851701fbf8b1dcfa8705082f72.488fdcc0eb2f6f1738c607d128441626'},
+      headers: {'Authorization': 'Zoho-oauthtoken 1000.738a923211c0e08c701cb31aaa02baf7.afa5b55554eeaaef42f69b9c64065398'},
     })
     const response1=await User.insertMany(response.data.data)
-    console.log("response",response.data)
     res.status(200).send(response1);
   } catch (err) {
     console.log(err)
