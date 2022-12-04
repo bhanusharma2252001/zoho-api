@@ -3,8 +3,8 @@ import Table from "./table"
 
 const App = () => {
   return <div>
-   <h1>Zoho CRM Users</h1>
-   <Table/>
+    <center><h1>Zoho CRM Users</h1></center>
+    <Table />
   </div>
 };
 
